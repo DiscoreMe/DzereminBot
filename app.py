@@ -11,14 +11,17 @@ def echo(message):
     messageHandler.create_answer(bot, message)
 
 def start_polling():
+    global bot
     while 1:
         try:
             bot.polling(none_stop=True)
         except:
             bot.stop_polling()
+            bot = telebot.TeleBot(settings.token)
             continue
         else:
             bot.stop_polling()
+            bot = telebot.TeleBot(settings.token)
             break
 
 def update():

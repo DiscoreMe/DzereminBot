@@ -1,6 +1,6 @@
 import command_system
 
-def test(messages, connection):
+def test(messages, connection, lang):
     sql = "SELECT * FROM `playlists`"
     result = connection.execute(sql)
     return result, None
