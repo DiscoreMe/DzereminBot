@@ -1,14 +1,9 @@
 import command_system
 
 def test(messages, connection):
-    with connection.cursor() as cursor:
-        # Read a single record
-        sql = "SELECT COUNT(*) FROM `playlists`"
-        cursor.execute(sql)
-        result = cursor.fetchone()
-        print(result)
-    connection.close()
-    return 'test', None
+    sql = "SELECT * FROM `playlists`"
+    result = connection.execute(sql)
+    return result, None
 
 
 info_command = command_system.Command()

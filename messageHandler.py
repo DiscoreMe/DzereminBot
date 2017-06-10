@@ -1,7 +1,11 @@
-import os
 import importlib
+import os
+
 from command_system import command_list
 from core.telegram import sendMessage
+from core.sql import MysqlConnection
+
+connection = MysqlConnection()
 
 def load_modules():
    files = os.listdir("commands")
@@ -9,7 +13,8 @@ def load_modules():
    for m in modules:
        importlib.import_module("commands." + m[0:-3])
 
-def get_answer(messages, connection):
+def get_answer(messages):
+    global connection
     body = messages.text.split()[0]
     message = "Список команд: /help"
     command = False
@@ -22,9 +27,10 @@ def get_answer(messages, connection):
                 break
         if command:
             break
+
     return message, options
 
-def create_answer(bot, messages, connection):
+def create_answer(bot, messages):
    load_modules()
-   message, options = get_answer(messages, connection)
+   message, options = get_answer(messages)
    sendMessage(bot, messages.chat.id, message, options)
