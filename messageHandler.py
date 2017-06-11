@@ -16,9 +16,15 @@ def load_modules():
 def get_answer(messages):
     global connection
     body = messages.text.split()[0]
-    message = "Список команд: /help"
+    message = ["Список команд: /help"]
     command = False
     options = None
+
+    if messages.reply_to_message is not None:
+        import locals.ru as lang
+        if messages.reply_to_message.text == "/setname" or messages.reply_to_message.text == lang.set_name or messages.reply_to_message.text == lang.busy_name:
+            body = "/reply!setname"
+
     for c in command_list:
         for k in c.keys:
             if k == body:

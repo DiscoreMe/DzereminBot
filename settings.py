@@ -1,1 +1,5 @@
-token = "383848125:AAGx4EdtCipUGcMdQ0P8KN6IprdfbXFKx2A"
+token = ""
+sql_host = ""
+sql_database = ""
+sql_user = ""
+sql_password = ""

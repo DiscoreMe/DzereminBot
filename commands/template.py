@@ -2,7 +2,7 @@ import command_system
 
 def command(messages, connection):
     message = ''
-    return message, None
+    return [message], None
 
 
 info_command = command_system.Command()

@@ -15,7 +15,9 @@ def start_polling():
     while 1:
         try:
             bot.polling(none_stop=True)
-        except:
+        except Exception as e:
+            print("Error: ", end='')
+            print(e)
             bot.stop_polling()
             bot = telebot.TeleBot(settings.token)
             continue

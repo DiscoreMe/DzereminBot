@@ -5,7 +5,7 @@ def help(messages, connection):
     for c in command_system.command_list:
         if c.isShow:
             message += c.keys[0] + ' - ' + c.description + '\n'
-    return message, None
+    return [message], None
 
 
 info_command = command_system.Command()
