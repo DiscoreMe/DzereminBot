@@ -3,12 +3,19 @@ import settings
 import messageHandler
 import threading
 import time
+import core.query_processing
+from core.sql import MysqlConnection
 
 bot = telebot.TeleBot(settings.token)
 
 @bot.message_handler(content_types=["text"])
 def echo(message):
     messageHandler.create_answer(bot, message)
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_echo(call):
+    call.message.text = call.data
+    messageHandler.create_answer(bot, call.message)
 
 def start_polling():
     global bot
@@ -27,8 +34,10 @@ def start_polling():
             break
 
 def update():
+    connection = MysqlConnection()
     while 1:
-        time.sleep(60)
+        core.query_processing.Query_Processing(bot, connection)
+        time.sleep(5)
 
 if __name__ == '__main__':
 

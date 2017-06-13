@@ -15,15 +15,29 @@ def load_modules():
 
 def get_answer(messages):
     global connection
-    body = messages.text.split()[0]
+    bodys_p = messages.text.split()
+    bodys_s = messages.text.split('_')
+    if len(bodys_p) == 1 and len(bodys_s) > 1:
+        body = bodys_s[0]
+    else:
+        body = bodys_p[0]
+
     message = ["Список команд: /help"]
     command = False
     options = None
-
+	
     if messages.reply_to_message is not None:
         import locals.ru as lang
         if messages.reply_to_message.text == "/setname" or messages.reply_to_message.text == lang.set_name or messages.reply_to_message.text == lang.busy_name:
             body = "/reply!setname"
+        elif messages.reply_to_message.text == lang.how_count_workes_stone:
+            body = "/reply!count_workes_stone"
+        elif messages.reply_to_message.text == lang.how_time_workes_stone:
+            body = "/reply!time_workes_stone"
+        elif messages.reply_to_message.text == lang.how_count_workes_wood:
+            body = "/reply!count_workes_wood"
+        elif messages.reply_to_message.text == lang.how_time_workes_wood:
+            body = "/reply!time_workes_wood"
 
     for c in command_list:
         for k in c.keys:
